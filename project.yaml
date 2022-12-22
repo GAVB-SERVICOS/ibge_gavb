@@ -1,0 +1,39 @@
+config:
+  model_name: "produtos-digitais-template"
+  template_file: "produtos_digitais_template.json"
+  vs_name : "vs_test"
+  start_time : "2021-01-26 16:00:00"
+  owner : "Data Science [Squad], [Data Scientist], [ML Engineer]"
+dev:
+  bucket : "gs://test-bucket-vertexai"
+  # schedule : "45 18 * * *"
+  workspace: 
+    project_id: "gavb-poc-bu-mlops-f-store"
+    dataset: "temp"
+  source:
+    project_id: "gavb-poc-bu-mlops-f-store"
+    dataset: "vertexai_teste"
+    table: "iris-vertexai"
+  destination:
+    project_id: "gavb-poc-bu-mlops-f-store"
+    dataset: "vertexai_teste"
+    splited: "iris-vertexai_prepped"
+    transformed: "iris-vertexai_transformed"
+    predicted: "iris-vertexai_predicted"
+
+prod:
+  bucket : "gs://test-bucket-vertexai"
+  # schedule : "45 18 * * *"
+  workspace: 
+    project_id: "gavb-poc-bu-mlops-f-store"
+    dataset: "temp"
+  source:
+    project_id: "gavb-poc-bu-mlops-f-store"
+    dataset: "vertexai_teste"
+    table: "iris-vertexai"
+  destination:
+    project_id: "gavb-poc-bu-mlops-f-store"
+    dataset: "vertexai_teste"
+    splited: "iris-vertexai_prepped"
+    transformed: "iris-vertexai_transformed"
+    predicted: "iris-vertexai_predicted"

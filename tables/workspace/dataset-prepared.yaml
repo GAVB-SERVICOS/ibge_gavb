@@ -1,0 +1,30 @@
+tableName: "iris-dataset-prepared"
+# partitionBy: "Col5"
+# partitionType: "datetime"
+# partitionRule: "MONTH"
+# tableClusters: "Col2,Col3"
+metadata:
+  - name: "sepal_length"
+    sequence: 1
+    type: "FLOAT"
+    description: "Sepal length"
+  - name: "sepal_width"
+    sequence: 2
+    type: "STRING"
+    description: "Sepal width"
+  - name: "petal_length"
+    sequence: 5
+    type: "STRING"
+    description: "Petal length"
+  - name: "petal_width"
+    sequence: 6
+    type: "STRING"
+    description: "Petal width"
+  - name: "species"
+    sequence: 7
+    type: "STRING"
+    description: "Coluna target: espécie de flor"
+  - name: "datasplit"
+    sequence: 8
+    type: "STRING"
+    description: "Flag para dados de treinamento ou teste [train|test]"
