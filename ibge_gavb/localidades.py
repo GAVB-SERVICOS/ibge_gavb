@@ -5,7 +5,11 @@ https://servicodados.ibge.gov.br/api/docs/
 """
 
 import requests
-import json 
+import json
+import urllib3
+import ssl
+#from urllib3.util.ssl_ import create_urllib3_context
+
 
 headers = {
     'Content-Type': 'application/json;charset=UTF-8',
@@ -16,11 +20,44 @@ headers = {
     'Connection': 'keep-alive',
 }
 
+class CustomHttpAdapter (requests.adapters.HTTPAdapter):
+    # "Transport adapter" that allows us to use custom ssl_context.
+
+    def __init__(self, ssl_context=None, **kwargs):
+        self.ssl_context = ssl_context
+        super().__init__(**kwargs)
+
+    def init_poolmanager(self, connections, maxsize, block=False):
+        self.poolmanager = urllib3.poolmanager.PoolManager(
+            num_pools=connections, maxsize=maxsize,
+            block=block, ssl_context=self.ssl_context)
+
+
+def get_legacy_session():
+    ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+    ctx.options |= 0x4  # OP_LEGACY_SERVER_CONNECT
+    session = requests.session()
+    session.mount('https://', CustomHttpAdapter(ctx))
+    return session
+
+
 class Regioes(object):
 
     def __init__(self, json_ibge=None):
+        # ctx = create_urllib3_context()
+        # ctx.load_default_certs()
+        # ctx.options |= 0x4  # ssl.OP_LEGACY_SERVER_CONNECT
+        # url = 'https://servicodados.ibge.gov.br/api/v1/localidades/regioes'
+        # with urllib3.PoolManager(ssl_context=ctx) as http:
+        #     request = http.request("GET", url, headers=headers)
+        #     self.json_ibge = json.loads(request.data.decode('utf-8'))
+            
+        # url = 'https://servicodados.ibge.gov.br/api/v1/localidades/regioes'
+        # request = requests.get(url, headers=headers, verify=False)
+        # self.json_ibge = json.loads(request.content.decode('utf-8'))
+
         url = 'https://servicodados.ibge.gov.br/api/v1/localidades/regioes'
-        request = requests.get(url, headers=headers)
+        request = get_legacy_session().get(url,headers=headers)
         self.json_ibge = json.loads(request.content.decode('utf-8'))
     
     def json(self):
@@ -46,7 +83,8 @@ class Estados(object):
 
     def __init__(self, json_ibge=None):
         url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
-        request = requests.get(url, headers=headers)
+        #request = requests.get(url, headers=headers)
+        request = get_legacy_session().get(url,headers=headers)
         self.json_ibge = json.loads(request.content.decode('utf-8'))
 
     def json(self):
@@ -72,7 +110,8 @@ class Municipios(object):
 
     def __init__(self, json_ibge=None):
         url = 'https://servicodados.ibge.gov.br/api/v1/localidades/municipios'
-        request = requests.get(url, headers=headers)
+        #request = requests.get(url, headers=headers)
+        request = get_legacy_session().get(url,headers=headers)
         self.json_ibge = json.loads(request.content.decode('utf-8'))
 
     def json(self):
@@ -111,7 +150,8 @@ class Municipio(object):
 
     def __init__(self, codigo_ibge=None, json_ibge=None):
         url = 'https://servicodados.ibge.gov.br/api/v1/localidades/municipios/{}'
-        request = requests.get(url.format(codigo_ibge), headers=headers)
+        #request = requests.get(url.format(codigo_ibge), headers=headers)
+        request = get_legacy_session().get(url.format(codigo_ibge),headers=headers)
         self.json_ibge = json.loads(request.content.decode('utf-8'))
 
     def json(self):
@@ -140,7 +180,8 @@ class MunicipioPorUF(object):
 
     def __init__(self, codigo_uf=None, json_ibge=None):
         url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/{}/municipios'
-        request = requests.get(url.format(codigo_uf), headers=headers)
+        #request = requests.get(url.format(codigo_uf), headers=headers)
+        request = get_legacy_session().get(url.format(codigo_uf),headers=headers)
         self.json_ibge = json.loads(request.content.decode('utf-8'))
 
     def json(self):
