@@ -459,7 +459,7 @@ class MunicipioPorUF(object):
         """
         Retorna os municípios pelo IDs das UFs.
 
-        :return: Lista com os municípios por UF
+        :return: Lista com os municípios por Uf
         :rtype: list
         """
         return [self.json_ibge[i]["nome"] for i in range(self.count())]
