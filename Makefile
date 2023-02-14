@@ -14,7 +14,7 @@ isort:
 	isort $(SRC_FOLDER) $(TEST_FOLDER)
 
 typecheck:
-	mypy --namespace-packages --explicit-package-bases -p gumly
+	mypy --namespace-packages --explicit-package-bases -p ibge
 
 test:
 	pytest --durations=5 $(TEST_FOLDER)

@@ -39,9 +39,9 @@ The general format is:
 
 ```
 
-# 1.0.0 - DATE ()
+# 1.0.0 - DATE (17/02/2023)
 
-### Feature
+### Features
 
-### localidades
-
+- module localidades.py
+  
