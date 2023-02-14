@@ -1,7 +1,14 @@
-from ibge.localidades import CustomHttpAdapter
-from ibge.localidades import get_legacy_session
 from unittest.mock import Mock, patch
-from ibge.localidades import Regioes, Estados, Municipio, Municipios, MunicipioPorUF
+
+from ibge.localidades import (
+    CustomHttpAdapter,
+    Estados,
+    Municipio,
+    MunicipioPorUF,
+    Municipios,
+    Regioes,
+    get_legacy_session,
+)
 
 
 def test_CustomHttpAdapter():

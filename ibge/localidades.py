@@ -4,11 +4,11 @@ https://servicodados.ibge.gov.br/api/docs/
 
 """
 
-import requests
 import json
-import urllib3
 import ssl
 
+import requests
+import urllib3
 
 headers = {
     "Content-Type": "application/json;charset=UTF-8",
@@ -54,7 +54,7 @@ class CustomHttpAdapter(requests.adapters.HTTPAdapter):
         :type: bool
         :return: O novo objeto
         :rtype: urllib3.poolmanager.PoolManager
-        
+
 
         """
 
@@ -119,7 +119,7 @@ class Regioes(object):
         """
         Retorna o tamanho do conteúdo.
 
-        :return: Inteiro reprentando o tamanho do json. 
+        :return: Inteiro reprentando o tamanho do json.
         :rtype: int
         """
         return len(self.json_ibge)
@@ -128,7 +128,7 @@ class Regioes(object):
         """
         Retorna o tamanho do conteúdo.
 
-        :return: Inteiro reprentando o tamanho do json. 
+        :return: Inteiro reprentando o tamanho do json.
         :rtype: int
         """
         return len(self.json_ibge)
@@ -137,7 +137,7 @@ class Regioes(object):
         """
         Retorna os IDs.
 
-        :return: Lista com os ids 
+        :return: Lista com os ids
         :rtype: list
         """
         return [self.json_ibge[i]["id"] for i in range(self.count())]
@@ -146,10 +146,10 @@ class Regioes(object):
         """
         Retorna as siglas.
 
-        :return: Lista com as siglas 
+        :return: Lista com as siglas
         :rtype: list
         """
-        
+
         return [self.json_ibge[i]["sigla"] for i in range(self.count())]
 
     def getNome(self):
@@ -199,7 +199,7 @@ class Estados(object):
         """
         Retorna o tamanho do conteúdo.
 
-        :return: Inteiro reprentando o tamanho do json. 
+        :return: Inteiro reprentando o tamanho do json.
         :rtype: int
         """
         return len(self.json_ibge)
@@ -208,7 +208,7 @@ class Estados(object):
         """
         Retorna os IDs.
 
-        :return: Lista com os ids 
+        :return: Lista com os ids
         :rtype: list
         """
         return [self.json_ibge[i]["id"] for i in range(self.count())]
@@ -217,7 +217,7 @@ class Estados(object):
         """
         Retorna as siglas.
 
-        :return: Lista com as siglas 
+        :return: Lista com as siglas
         :rtype: list
         """
         return [self.json_ibge[i]["sigla"] for i in range(self.count())]
@@ -270,7 +270,7 @@ class Municipios(object):
         """
         Retorna o tamanho do conteúdo.
 
-        :return: Inteiro reprentando o tamanho do json. 
+        :return: Inteiro reprentando o tamanho do json.
         :rtype: int
         """
         return len(self.json_ibge)
@@ -279,7 +279,7 @@ class Municipios(object):
         """
         Retorna os IDs.
 
-        :return: Lista com os ids 
+        :return: Lista com os ids
         :rtype: list
         """
         return [self.json_ibge[i]["id"] for i in range(self.count())]
@@ -334,7 +334,7 @@ class Municipio(object):
     json trazendo o conteúdo do Município específico.
     """
 
-    def __init__(self, codigo_ibge:str=None):
+    def __init__(self, codigo_ibge: str = None):
         """
         Faz o request e gera conteúdo em json.
         :param codigo_ibge: Número do código do município.
@@ -367,7 +367,7 @@ class Municipio(object):
         """
         Retorna o tamanho do conteúdo.
 
-        :return: Inteiro reprentando o tamanho do json. 
+        :return: Inteiro reprentando o tamanho do json.
         :rtype: int
         """
         return int(len(self.json_ibge) / 3)
@@ -376,7 +376,7 @@ class Municipio(object):
         """
         Retorna os IDs.
 
-        :return: Lista com o id 
+        :return: Lista com o id
         :rtype: int
         """
         return self.json_ibge["id"]
@@ -441,7 +441,7 @@ class MunicipioPorUF(object):
         """
         Retorna o tamanho do conteúdo.
 
-        :return: Inteiro reprentando o tamanho do json. 
+        :return: Inteiro reprentando o tamanho do json.
         :rtype: int
         """
         return len(self.json_ibge)
@@ -450,7 +450,7 @@ class MunicipioPorUF(object):
         """
         Retorna os IDs.
 
-        :return: Lista com o id 
+        :return: Lista com o id
         :rtype: list
         """
         return [self.json_ibge[i]["id"] for i in range(self.count())]
